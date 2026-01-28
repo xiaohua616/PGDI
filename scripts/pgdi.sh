@@ -8,7 +8,7 @@ python fewshot_kd.py \
     --T 20 \
     --bn_mmt 0.9 \
     --warmup 20 \
-    --epochs 800 \
+    --epochs 200 \
     --dataset cifar100 \
     --method PGDI \
     --lr_z 0.015 \
@@ -33,6 +33,6 @@ python fewshot_kd.py \
     --real_fewshot_final_stage 8 \
     --guidance_loss_w 100 \
     --logits_guidance_w 1 \
-    --mixed_distill_stop_epoch 300 \
-    --log_tag "PGDI" \
-    --save_dir "run/PGDI"
+    --mixed_distill_stop_epoch 100 \
+    --log_tag "PGDI_config" \
+    --save_dir "run/PGDI_config"

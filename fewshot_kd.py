@@ -128,45 +128,45 @@ parser.add_argument('--pretrained', dest='pretrained', action='store_true',
                     help='use pre-trained model')
 
 parser.add_argument('--logits_guidance_w', default=0, type=float,
-                    help='# Logits指导损失的权重 (默认为0，即禁用)')
+                    help='# Weight for logits guidance loss (default 0, disabled)')
 parser.add_argument('--logits_loss_type', default='kl_softmax', type=str,
-                    help='# Logits指导损失的类型')
+                    help='# Type of logits guidance loss')
 
-parser.add_argument('--guidance_loss_w',    default=1, type=float, help='few-shot 特征指导权重')
-parser.add_argument('--guidance_loss_type', default='l2_min', type=str, help='特征指导损失类型 (l2_min|l2_mean)')
-parser.add_argument('--teacher_feature_source', default='bn_hooks', type=str, help='教师模型中提取特征指导的来源层')
+parser.add_argument('--guidance_loss_w',    default=1, type=float, help='Weight for few-shot feature guidance')
+parser.add_argument('--guidance_loss_type', default='l2_min', type=str, help='Type of feature guidance loss (l2_min|l2_mean)')
+parser.add_argument('--teacher_feature_source', default='bn_hooks', type=str, help='Source layer in teacher model for extracting feature guidance')
 
 parser.add_argument('--fewshot_n_per_class', default=5, type=int, metavar='N',
                     help='number of total epochs to run')
 parser.add_argument('--real_fewshot_per_step', default=0, type=int,
-                    help='每个蒸馏步骤中与合成批次混合的真实少样本图片数量。设置为0则禁用。')
+                    help='Number of real few-shot images mixed with synthetic batch per distillation step. Set to 0 to disable.')
 
 parser.add_argument('--use_all_fewshot_per_step', action='store_true',
-                    help='如果设置，则在每个蒸馏步骤中混合全部真实小样本图片，而不是按批次采样。')
+                    help='If set, mix all real few-shot images in every distillation step instead of sampling by batch.')
 
 parser.add_argument('--loss_ema_momentum', type=float, default=0.9,
-                    help='用于平滑损失的指数移动平均动量 (mu)。范围: 0.0 到 1.0。 (默认: 0.9)')
+                    help='Exponential moving average momentum (mu) for smoothing loss. Range: 0.0 to 1.0. (Default: 0.9)')
 
 parser.add_argument('--real_data_loss_weight', type=float, default=0.9,
-                    help='课程学习法中 alpha 的初始值 (训练开始时)')
+                    help='Initial value of alpha in curriculum learning (at the start of training)')
 parser.add_argument('--alpha_schedule', type=str, default='cosine', choices=['none', 'linear', 'cosine'],
-                    help='alpha 的动态调度策略 (none: 使用固定的 real_data_loss_weight)')
+                    help='Dynamic schedule strategy for alpha (none: use fixed real_data_loss_weight)')
 parser.add_argument('--alpha_initial', type=float, default=0.9,
-                    help='课程学习法中 alpha 的初始值 (训练开始时)')
+                    help='Initial value of alpha in curriculum learning (at the start of training)')
 
 parser.add_argument('--real_fewshot_schedule', type=str, default='cosine', choices=['none', 'linear', 'cosine'],
-                    help='每个蒸馏步骤中混合的真实图片数量的动态调度策略')
+                    help='Dynamic schedule strategy for the number of real images mixed in each distillation step')
 parser.add_argument('--real_fewshot_initial', type=int, default=64,
-                    help='课程学习法中每个step使用的真实图片初始数量')
+                    help='Initial number of real images used per step in curriculum learning')
 
 parser.add_argument('--mixed_distill_stop_epoch', type=int, default=500,
-                    help='混合蒸馏第一阶段结束的 epoch。在此之后将进入第二阶段。')
+                    help='Epoch where the first stage of mixed distillation ends. The second stage begins after this.')
 
 parser.add_argument('--alpha_final_stage', type=float, default=0.05,
-                    help='第二阶段中 alpha 的固定值 (一个很小的值)')
+                    help='Fixed value of alpha in the second stage (a very small value)')
 
 parser.add_argument('--real_fewshot_final_stage', type=int, default=4,
-                    help='第二阶段中每个step使用的真实图片的固定数量 (一个很小的数目)')
+                    help='Fixed number of real images used per step in the second stage (a small number)')
 
 best_acc1 = 0
 time_cost = 0
@@ -535,7 +535,7 @@ def write_results_to_file(args, best_acc1):
         print(f"Error writing to file: {e}")
 
 
-def train(synthesizer, model, criterion, optimizer, args, real_fewshot_images=None, real_fewshot_labels=None): # 添加 real_fewshot_images 参数
+def train(synthesizer, model, criterion, optimizer, args, real_fewshot_images=None, real_fewshot_labels=None): 
     global time_cost # 
     
     loss_metric_synth = inversion.metrics.RunningLoss(inversion.criterions.KLDiv(reduction='sum'))
