@@ -8,19 +8,19 @@ Official PyTorch implementation of **PGDI**. We propose a few-shot distillation 
 
 PGDI achieves state-of-the-art performance on **CIFAR-10**, **CIFAR-100**, and **Tiny-ImageNet** benchmarks.
 
-| Dataset | Teacher | Student | PGDI (10-shot) Top-1 Acc |
-| :--- | :--- | :--- | :--- |
-| **CIFAR-10** | ResNet-34 | ResNet-18 | **95.10%** |
-| | VGG-11 | ResNet-18 | **91.32%** |
-| | WRN-40-2 | WRN-16-1 | **89.15%** |
-| | WRN-40-2 | WRN-40-1 | **93.23%** |
-| | WRN-40-2 | WRN-16-2 | **92.83%** |
-| **CIFAR-100** | ResNet-34 | ResNet-18 | **77.13%** |
-| | VGG-11 | ResNet-18 | **70.97%** |
-| | WRN-40-2 | WRN-16-1 | **53.97%** |
-| | WRN-40-2 | WRN-40-1 | **69.55%** |
-| | WRN-40-2 | WRN-16-2 | **69.40%** |
-| **Tiny-ImageNet** | ResNet-34 | ResNet-18 | **64.17%** |
+| Dataset | Teacher | Student | PGDI (5-shot) | PGDI (10-shot) |
+| :--- | :--- | :--- | :---: | :---: |
+| **CIFAR-10** | ResNet-34 | ResNet-18 | 94.61% | **95.10%** |
+| | VGG-11 | ResNet-18 | 90.67% | **91.32%** |
+| | WRN-40-2 | WRN-16-1 | 88.45% | **89.15%** |
+| | WRN-40-2 | WRN-40-1 | 92.89% | **93.23%** |
+| | WRN-40-2 | WRN-16-2 | 92.73% | **92.83%** |
+| **CIFAR-100** | ResNet-34 | ResNet-18 | 76.96% | **77.13%** |
+| | VGG-11 | ResNet-18 | 70.15% | **70.97%** |
+| | WRN-40-2 | WRN-16-1 | 53.65% | **53.97%** |
+| | WRN-40-2 | WRN-40-1 | 69.46% | **69.55%** |
+| | WRN-40-2 | WRN-16-2 | 69.24% | **69.40%** |
+| **Tiny-ImageNet** | ResNet-34 | ResNet-18 | 64.13% | **64.17%** |
 
 ## 🚀 Quick Start
 
